@@ -2,10 +2,11 @@ package co.zw.gotour.server.Configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration;
+import org.springframework.data.couchbase.repository.config.EnableReactiveCouchbaseRepositories;
 
 @Configuration
+@EnableReactiveCouchbaseRepositories
 public class CouchbaseConfiguration extends AbstractCouchbaseConfiguration {
     @Value("${couchbase.url}")
     private String url ;
@@ -19,9 +20,9 @@ public class CouchbaseConfiguration extends AbstractCouchbaseConfiguration {
     @Value("${couchbase.bucketname}")
     private String bucket;
 
+
     @Override
     public String getConnectionString() {
-
         return url;
     }
 
@@ -39,4 +40,5 @@ public class CouchbaseConfiguration extends AbstractCouchbaseConfiguration {
     public String getBucketName() {
         return bucket;
     }
+
 }
