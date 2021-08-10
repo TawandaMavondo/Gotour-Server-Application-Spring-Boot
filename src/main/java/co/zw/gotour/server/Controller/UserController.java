@@ -26,6 +26,7 @@ public class UserController {
         User user = new User();
         user.setLastname("Mavondo");
         user.setFirstname("Tawanda");
+        user.setEmail("email@g.com");
         var saved = userService.save(user);
         return ResponseEntity.ok(saved);
     }

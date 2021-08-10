@@ -1,7 +1,6 @@
 package co.zw.gotour.server.Model;
 
 import co.zw.gotour.server.Util.DocumentType;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.Id;
@@ -25,5 +24,17 @@ public class User extends Model {
 
     @Field
     private String lastname;
+
+    @Field
+    private String email;
+
+    @Field()
+    private String username;
+
+    @Field
+    private String[] roles;
+
+
+
 
 }
