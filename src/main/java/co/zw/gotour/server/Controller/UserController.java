@@ -2,10 +2,9 @@ package co.zw.gotour.server.Controller;
 
 import co.zw.gotour.server.Model.User;
 import co.zw.gotour.server.Service.UserService;
+import io.sentry.spring.tracing.SentrySpan;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-
-import com.couchbase.client.core.msg.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +24,7 @@ public class UserController {
     UserService userService;
 
     @PostMapping()
+    @SentrySpan
     public ResponseEntity<User> getUser() throws Exception {
         User user = new User();
         user.setLastName("Mavondo");
@@ -36,6 +36,7 @@ public class UserController {
     }
 
     @GetMapping()
+    @SentrySpan
     public ResponseEntity<Iterable<User>> getUsers() {
         return ResponseEntity.ok(this.userService.find());
     }

@@ -2,7 +2,8 @@ package co.zw.gotour.server.Service;
 
 import co.zw.gotour.server.Model.Model;
 import co.zw.gotour.server.Util.DocumentType;
-
+import io.sentry.Sentry;
+import io.sentry.spring.tracing.SentryTransaction;
 
 import org.springframework.data.repository.CrudRepository;
 
@@ -25,13 +26,13 @@ public abstract class AbstractService<T extends Model> {
             if (e instanceof IndexOutOfBoundsException) {
                 throw new IllegalArgumentException("The @DocumentType Annotation is required for all Model Classes");
             }
+            Sentry.captureException(e);
             throw new Exception(e);
         }
     }
-
+    @SentryTransaction(operation = "FindAll")
     public Iterable<T> find() {
         return this.repository.findAll();
-
     }
 
     public T findById(String id) {
