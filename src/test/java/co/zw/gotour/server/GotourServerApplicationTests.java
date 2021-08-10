@@ -8,6 +8,7 @@ class GotourServerApplicationTests {
 
 	@Test
 	void contextLoads() {
+		
 	}
 
 }
