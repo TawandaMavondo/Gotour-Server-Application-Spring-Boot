@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.couchbase.core.mapping.Document;
 import org.springframework.data.couchbase.core.mapping.Field;
 import org.springframework.data.couchbase.core.mapping.id.GeneratedValue;
@@ -14,6 +15,7 @@ import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
 @EqualsAndHashCode
 @Document
 @DocumentType(type = "user")
+// @TypeAlias("user")
 public class User extends Model {
 
     @Id
