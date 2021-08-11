@@ -8,9 +8,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService extends AbstractService<User> {
 
+    UserRepository repository;
+
     @Autowired
     UserService(UserRepository userRepository) {
-        super(userRepository,User.class);
+        super(userRepository, User.class);
+        this.repository = userRepository;
     }
 
+    @Override
+    public User save(User entity) throws Exception {
+        User user = this.repository.findByUserName(entity.getUserName());
+        
+        // if (!user.equals(null)) return null;
+            //throw new Exception("User with username " + entity.getUserName() + " already exists");
+
+        return super.save(entity);
+    }
 }
