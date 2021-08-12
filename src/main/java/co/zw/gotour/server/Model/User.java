@@ -23,16 +23,16 @@ public class User extends Model {
     private String id;
 
     @Field
-    private String firstName;
+    private String firstname;
 
     @Field
-    private String lastName;
+    private String lastname;
 
     @Field
     private String email;
 
     @Field()
-    private String userName;
+    private String username;
 
     @Field
     private String[] roles;
