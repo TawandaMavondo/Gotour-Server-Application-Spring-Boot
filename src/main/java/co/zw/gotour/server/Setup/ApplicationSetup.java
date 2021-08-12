@@ -27,7 +27,6 @@ public class ApplicationSetup implements ApplicationListener<ContextRefreshedEve
 
     List<QueryIndex> indexes = List.of();
 
-    @Value("${couchbase.bucketname}")
     private String bucket;
 
     Logger logger = LoggerFactory.getLogger(ApplicationSetup.class);
@@ -36,7 +35,7 @@ public class ApplicationSetup implements ApplicationListener<ContextRefreshedEve
     public void onApplicationEvent(ContextRefreshedEvent event) {
         this.bucket = this.couchbaseConfiguration.getBucketName();
         this.createIndexIfNotExist("Index_entityType", List.of("entityType"));
-        this.createIndexIfNotExist("Index_username", List.of("userName"));
+        this.createIndexIfNotExist("Index_username", List.of("username"));
         this.createIndexIfNotExist("index_class", List.of("_class"));
 
     }
