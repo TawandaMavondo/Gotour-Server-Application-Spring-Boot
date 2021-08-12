@@ -25,14 +25,20 @@ public class UserController {
 
     @PostMapping()
     @SentrySpan
-    public ResponseEntity<User> getUser() throws Exception {
+    public ResponseEntity<?> createUser() throws Exception {
         User user = new User();
         user.setLastName("Mavondo");
         user.setFirstName("Tawanda");
         user.setEmail("email@g.com");
-        user.setUserName("tawawandag");
-        var saved = userService.save(user);
-        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+        user.setUserName("tawawandag2");
+
+        try {
+            var saved = userService.save(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @GetMapping()
