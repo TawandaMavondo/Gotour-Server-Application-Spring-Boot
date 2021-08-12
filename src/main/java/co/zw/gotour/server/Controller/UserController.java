@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,13 +26,8 @@ public class UserController {
 
     @PostMapping()
     @SentrySpan
-    public ResponseEntity<?> createUser() throws Exception {
-        User user = new User();
-        user.setLastName("Mavondo");
-        user.setFirstName("Tawanda");
-        user.setEmail("email@g.com");
-        user.setUserName("tawawandag2");
-
+    public ResponseEntity<?> createUser(@RequestBody User user) throws Exception {
+       
         try {
             var saved = userService.save(user);
             return ResponseEntity.status(HttpStatus.CREATED).body(saved);

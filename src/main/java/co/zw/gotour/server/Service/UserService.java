@@ -22,10 +22,15 @@ public class UserService extends AbstractService<User> {
 
     @Override
     public User save(User entity) throws Exception {
+        // this.repository.deleteAll();
+        entity = (User) entity;
         User user = this.repository.findByUserName(entity.getUserName());
+        if (user == null)
+            return super.save(entity);
 
-        if (user != null)
-        throw new Exception("Username already exists");
+        if (user.getUserName().equals(entity.getUserName()))
+            throw new Exception("Username already exists");
+
         return super.save(entity);
     }
 }
