@@ -30,6 +30,7 @@ public abstract class AbstractService<T extends Model> {
             throw new Exception(e);
         }
     }
+
     @SentryTransaction(operation = "FindAll")
     public Iterable<T> find() {
         return this.repository.findAll();
@@ -41,6 +42,23 @@ public abstract class AbstractService<T extends Model> {
         }
 
         return this.repository.findById(id).get();
+    }
+
+    public void delete(String id) {
+        if (id == null)
+            throw new IllegalArgumentException("The Id Parameter is required");
+
+        this.repository.deleteById(id);
+
+    }
+
+    public T update(T entity) throws Exception {
+
+        if (entity.getId() == null)
+            throw new IllegalArgumentException("The Id Parameter is required");
+        
+        return this.save(entity);    
+
     }
 
 }

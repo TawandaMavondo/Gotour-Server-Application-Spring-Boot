@@ -18,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,6 +62,15 @@ public class UserController {
     @SentrySpan
     public ResponseEntity<Iterable<User>> getUsers() {
         return ResponseEntity.ok(this.userService.find());
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable String id) throws Exception {
+
+        user.setId(id);
+
+        return ResponseEntity.ok(this.userService.update(user));
+
     }
 
 }

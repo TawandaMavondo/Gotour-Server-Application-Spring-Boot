@@ -18,10 +18,7 @@ import org.springframework.data.couchbase.core.mapping.id.GenerationStrategy;
 // @TypeAlias("user")
 public class User extends Model {
 
-    @Id
-    @GeneratedValue(strategy = GenerationStrategy.UNIQUE)
-    private String id;
-
+   
     @Field
     private String firstname;
 
