@@ -7,7 +7,6 @@ import io.sentry.spring.tracing.SentryTransaction;
 
 import java.util.Optional;
 
-import com.couchbase.client.core.error.DocumentNotFoundException;
 
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.data.repository.CrudRepository;
