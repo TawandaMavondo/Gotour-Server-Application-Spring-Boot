@@ -7,6 +7,9 @@ import io.sentry.spring.tracing.SentryTransaction;
 
 import java.util.Optional;
 
+import com.couchbase.client.core.error.DocumentNotFoundException;
+
+import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.data.repository.CrudRepository;
 import org.webjars.NotFoundException;
 
@@ -44,14 +47,23 @@ public abstract class AbstractService<T extends Model> {
             throw new IllegalArgumentException("The Id Parameter is required");
         }
 
-        return this.repository.findById(id).get();
+        Optional<T> document = this.repository.findById(id);
+        if (document.isEmpty())
+            throw new NotFoundException("Document assocciated with id: " + id + " is not found");
+
+        return document.get();
     }
 
-    public void delete(String id) {
+    public void delete(String id) throws Exception {
         if (id == null)
             throw new IllegalArgumentException("The Id Parameter is required");
 
-        this.repository.deleteById(id);
+        // TODO: Apply a disable field on User Objects when the Delete method is called.
+        try {
+            this.repository.deleteById(id);
+        } catch (DataRetrievalFailureException e) {
+            throw new Exception("Document not found");
+        }
 
     }
 

@@ -1,6 +1,7 @@
 package co.zw.gotour.server.Controller;
 
 import co.zw.gotour.server.Configuration.LoggerConfig;
+import co.zw.gotour.server.Exception.ApiException;
 import co.zw.gotour.server.Exception.ApiRequestException;
 import co.zw.gotour.server.Model.User;
 import co.zw.gotour.server.Service.UserService;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -66,6 +68,17 @@ public class UserController {
         return ResponseEntity.ok(this.userService.find());
     }
 
+    @GetMapping("/{id}")
+    @SentrySpan
+    public ResponseEntity<User> getUser(@PathVariable String id) {
+        try {
+            return ResponseEntity.ok(this.userService.findById(id));
+
+        } catch (Exception e) {
+            throw new ApiRequestException(e.getMessage());
+        }
+    }
+
     @PatchMapping("/{id}")
     public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable String id) {
         user.setId(id);
@@ -75,6 +88,16 @@ public class UserController {
             throw new ApiRequestException(e.getMessage());
         }
 
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable String id) {
+        try {
+            this.userService.delete(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            throw new ApiRequestException(e.getMessage());
+        }
     }
 
 }
