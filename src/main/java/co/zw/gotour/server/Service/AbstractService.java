@@ -5,7 +5,10 @@ import co.zw.gotour.server.Util.DocumentType;
 import io.sentry.Sentry;
 import io.sentry.spring.tracing.SentryTransaction;
 
+import java.util.Optional;
+
 import org.springframework.data.repository.CrudRepository;
+import org.webjars.NotFoundException;
 
 public abstract class AbstractService<T extends Model> {
 
@@ -56,8 +59,23 @@ public abstract class AbstractService<T extends Model> {
 
         if (entity.getId() == null)
             throw new IllegalArgumentException("The Id Parameter is required");
-        
-        return this.save(entity);    
+
+        Optional<T> findEntity = this.repository.findById(entity.getId());
+
+        if (findEntity.isEmpty())
+            throw new NotFoundException("Document assocciated with id: " + entity.getId() + " is not found");
+
+        try {
+            var annotation = this.entityClass.getAnnotationsByType(DocumentType.class)[0];
+            entity.entityType = annotation.type();
+            return this.repository.save(entity);
+        } catch (Exception e) {
+            if (e instanceof IndexOutOfBoundsException) {
+                throw new IllegalArgumentException("The @DocumentType Annotation is required for all Model Classes");
+            }
+            Sentry.captureException(e);
+            throw new Exception(e);
+        }
 
     }
 

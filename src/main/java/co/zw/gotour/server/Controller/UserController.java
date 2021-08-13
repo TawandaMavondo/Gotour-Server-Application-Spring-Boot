@@ -1,6 +1,7 @@
 package co.zw.gotour.server.Controller;
 
 import co.zw.gotour.server.Configuration.LoggerConfig;
+import co.zw.gotour.server.Exception.ApiRequestException;
 import co.zw.gotour.server.Model.User;
 import co.zw.gotour.server.Service.UserService;
 import io.sentry.spring.tracing.SentrySpan;
@@ -16,6 +17,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -36,7 +38,7 @@ public class UserController {
 
     private final Logger logger = LogManager.getLogger();
 
-    @PostMapping()
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @SentrySpan
     @ApiResponses(value = {
 
@@ -47,14 +49,14 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Username Already Exists")
 
     })
-    public ResponseEntity<?> createUser(@RequestBody User user) throws Exception {
+    public ResponseEntity<Object> createUser(@RequestBody User user)  {
 
         try {
             var saved = userService.save(user);
             return ResponseEntity.status(HttpStatus.CREATED).body(saved);
 
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            throw new ApiRequestException(e.getMessage());
         }
     }
 
@@ -66,9 +68,7 @@ public class UserController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable String id) throws Exception {
-
         user.setId(id);
-
         return ResponseEntity.ok(this.userService.update(user));
 
     }
