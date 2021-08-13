@@ -1,6 +1,4 @@
 package co.zw.gotour.server.Exception;
-
-import java.io.Serializable;
 import java.time.ZonedDateTime;
 import org.springframework.http.HttpStatus;
 

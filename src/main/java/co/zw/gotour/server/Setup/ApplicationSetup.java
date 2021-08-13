@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.manager.query.QueryIndex;
-import com.google.api.client.util.Value;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
