@@ -65,18 +65,7 @@ public abstract class AbstractService<T extends Model> {
         if (findEntity.isEmpty())
             throw new NotFoundException("Document assocciated with id: " + entity.getId() + " is not found");
 
-        try {
-            var annotation = this.entityClass.getAnnotationsByType(DocumentType.class)[0];
-            entity.entityType = annotation.type();
-            return this.repository.save(entity);
-        } catch (Exception e) {
-            if (e instanceof IndexOutOfBoundsException) {
-                throw new IllegalArgumentException("The @DocumentType Annotation is required for all Model Classes");
-            }
-            Sentry.captureException(e);
-            throw new Exception(e);
-        }
-
+        return this.save(entity);
     }
 
 }

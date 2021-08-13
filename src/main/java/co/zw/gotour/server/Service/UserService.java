@@ -27,7 +27,7 @@ public class UserService extends AbstractService<User> {
         if (user == null)
             return super.save(entity);
 
-        if (user.getUsername().equals(entity.getUsername()))
+        if (user.getUsername().equals(entity.getUsername()) && entity.getId()==null)
             throw new Exception("Username already exists");
 
         return super.save(entity);

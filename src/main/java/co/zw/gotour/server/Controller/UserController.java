@@ -38,7 +38,7 @@ public class UserController {
 
     private final Logger logger = LogManager.getLogger();
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping()
     @SentrySpan
     @ApiResponses(value = {
 
@@ -49,7 +49,7 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "Username Already Exists")
 
     })
-    public ResponseEntity<Object> createUser(@RequestBody User user)  {
+    public ResponseEntity<Object> createUser(@RequestBody User user) {
 
         try {
             var saved = userService.save(user);
@@ -67,9 +67,13 @@ public class UserController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable String id) throws Exception {
+    public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable String id) {
         user.setId(id);
-        return ResponseEntity.ok(this.userService.update(user));
+        try {
+            return ResponseEntity.ok(this.userService.update(user));
+        } catch (Exception e) {
+            throw new ApiRequestException(e.getMessage());
+        }
 
     }
 
