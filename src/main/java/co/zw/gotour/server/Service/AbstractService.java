@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
 
 public abstract class AbstractService<T extends Model> {
@@ -21,7 +22,7 @@ public abstract class AbstractService<T extends Model> {
         this.repository = repository;
         this.entityClass = entityClass;
     }
-
+    @Transactional
     public T save(T entity) throws Exception {
         try {
             var annotation = this.entityClass.getAnnotationsByType(DocumentType.class)[0];
