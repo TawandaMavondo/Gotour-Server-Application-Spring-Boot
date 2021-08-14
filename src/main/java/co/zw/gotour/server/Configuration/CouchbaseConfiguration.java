@@ -46,10 +46,10 @@ public class CouchbaseConfiguration extends AbstractCouchbaseConfiguration {
         return bucket;
     }
 
-    @Bean
-	public Transactions transactions(final Cluster couchbaseCluster) {
-		return Transactions.create(couchbaseCluster, TransactionConfigBuilder.create()
-			.build());
-	}
+    // @Bean
+	// public Transactions transactions(final Cluster couchbaseCluster) {
+	// 	return Transactions.create(couchbaseCluster, TransactionConfigBuilder.create()
+	// 		.build());
+	// }
 
 }
