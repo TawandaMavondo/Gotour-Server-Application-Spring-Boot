@@ -34,15 +34,14 @@ public class UserController {
     @Autowired
     UserService userService;
 
-   private final Logger logger = LogManager.getLogger();
+    private final Logger logger = LogManager.getLogger();
 
     @PostMapping()
     @SentrySpan
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Successfully Created User ", content = @Content(schema = @Schema(implementation = User.class))),
             // TODO: Later insert the content of the Global Custon APIException Handler
-            @ApiResponse(responseCode = "400", description = "Username Already Exists")
-    })
+            @ApiResponse(responseCode = "400", description = "Username Already Exists") })
     public ResponseEntity<Object> createUser(@RequestBody User user) {
 
         try {
@@ -89,6 +88,10 @@ public class UserController {
         } catch (Exception e) {
             throw new ApiRequestException(e.getMessage());
         }
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
 }
