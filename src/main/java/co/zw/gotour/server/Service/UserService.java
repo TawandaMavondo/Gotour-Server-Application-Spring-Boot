@@ -15,6 +15,7 @@ public class UserService extends AbstractService<User> {
     Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
+    public
     UserService(UserRepository userRepository) {
         super(userRepository, User.class);
         this.repository = userRepository;

@@ -13,8 +13,4 @@ public class AppConfiguration {
     return builder.build();
   }
 
-  // @Bean
-  // public PlatformTransactionManager txManager() {
-  //   return null; // more on that later
-  // }
 }
