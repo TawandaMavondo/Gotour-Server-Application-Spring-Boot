@@ -15,7 +15,6 @@ import org.springframework.data.couchbase.core.mapping.Field;
 // @TypeAlias("user")
 public class User extends Model {
 
-   
     @Field
     private String firstname;
 
@@ -31,7 +30,7 @@ public class User extends Model {
     @Field
     private String[] roles;
 
-
-
+    @Field
+    private String firebaseId;
 
 }

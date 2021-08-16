@@ -3,6 +3,11 @@ package co.zw.gotour.server.Service;
 import co.zw.gotour.server.Model.LoginRequest;
 import co.zw.gotour.server.Model.User;
 import co.zw.gotour.server.Repository.UserRepository;
+import co.zw.gotour.server.Util.FirebaseUserMapper;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseToken;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +19,9 @@ public class UserService extends AbstractService<User> {
 
     UserRepository repository;
     Logger logger = LoggerFactory.getLogger(UserService.class);
+
+    @Autowired
+    FirebaseAuth firebaseAuth;
 
     @Autowired
     public UserService(UserRepository userRepository) {
@@ -34,11 +42,31 @@ public class UserService extends AbstractService<User> {
         return super.save(entity);
     }
 
-    public User login(LoginRequest request) {
+    public User createUserByToken(String token) throws FirebaseAuthException {
+        FirebaseToken firebaseToken = this.getFirebaseToken(token);
+        var firebaseUser = firebaseAuth.getUser(firebaseToken.getUid());
 
-        // if((request.getPassword()==null) && request.get)
+        var existingUser = this.repository.findByEmail(firebaseUser.getEmail());
 
-        return null;
+        if (existingUser != null) {
+            return existingUser;
+        }
+
+        User user = FirebaseUserMapper.mapToUser(firebaseUser);
+
+        user = this.repository.save(user);
+
+        return user;
 
     }
+
+    private FirebaseToken getFirebaseToken(String token) {
+        try {
+            return this.firebaseAuth.verifyIdToken(token);
+
+        } catch (FirebaseAuthException e) {
+            throw new SecurityException("Unauthorized");
+        }
+    }
+
 }
