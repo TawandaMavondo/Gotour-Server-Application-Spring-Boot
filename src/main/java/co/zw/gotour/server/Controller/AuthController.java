@@ -37,6 +37,7 @@ public class AuthController {
         }
 
     }
+    // TODO: Get user by Token.
 
     private String getToken(String authorization) {
         return authorization.replace(Pattern.compile("^Bearer ").pattern(), "");
