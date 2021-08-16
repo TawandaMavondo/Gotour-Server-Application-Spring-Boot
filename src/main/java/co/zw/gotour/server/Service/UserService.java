@@ -1,5 +1,6 @@
 package co.zw.gotour.server.Service;
 
+import co.zw.gotour.server.Model.LoginRequest;
 import co.zw.gotour.server.Model.User;
 import co.zw.gotour.server.Repository.UserRepository;
 
@@ -15,8 +16,7 @@ public class UserService extends AbstractService<User> {
     Logger logger = LoggerFactory.getLogger(UserService.class);
 
     @Autowired
-    public
-    UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository) {
         super(userRepository, User.class);
         this.repository = userRepository;
     }
@@ -28,9 +28,17 @@ public class UserService extends AbstractService<User> {
         if (user == null)
             return super.save(entity);
 
-        if (user.getUsername().equals(entity.getUsername()) && entity.getId()==null)
+        if (user.getUsername().equals(entity.getUsername()) && entity.getId() == null)
             throw new Exception("Username already exists");
 
         return super.save(entity);
+    }
+
+    public User login(LoginRequest request) {
+
+        // if((request.getPassword()==null) && request.get)
+
+        return null;
+
     }
 }
