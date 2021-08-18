@@ -6,13 +6,18 @@ import co.zw.gotour.server.Model.User;
 
 public class FirebaseUserMapper {
 
-   public static User mapToUser(UserRecord firebaseUser) {
+    public static User mapToUser(UserRecord firebaseUser) {
         User user = new User();
+
+        String[] displayName = firebaseUser.getDisplayName().split(" ");
+        String firstname = displayName[0];
+        String lastname = displayName[1];
 
         user.setEmail(firebaseUser.getEmail());
         user.setFirebaseId(firebaseUser.getUid());
         // TODO: Map userRecord.getDisplayName() -> user.firstname and user.lastname
-
+        user.setFirstname(firstname);
+        user.setLastname(lastname);
         return user;
 
     }

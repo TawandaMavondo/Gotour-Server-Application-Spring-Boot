@@ -1,3 +1,4 @@
+
 package co.zw.gotour.server.Controller;
 
 import java.util.regex.Pattern;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import co.zw.gotour.server.Exception.ApiRequestException;
 import co.zw.gotour.server.Model.User;
@@ -20,6 +22,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RestController
 @Tag(name = "Authentication Endpoints")
 @RequestMapping("/auth")
+@CrossOrigin
 public class AuthController {
 
     @Autowired
@@ -40,6 +43,6 @@ public class AuthController {
     // TODO: Get user by Token.
 
     private String getToken(String authorization) {
-        return authorization.replace(Pattern.compile("^Bearer ").pattern(), "");
+        return authorization.replace("Bearer ", "").trim();
     }
 }
