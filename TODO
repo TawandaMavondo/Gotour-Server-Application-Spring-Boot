@@ -1,0 +1,5 @@
+
+TODO:
+☐ Automatically Generate a username from the firstname and lastname 
+☐ Change the Custom DocumentType Annotation to using @TypeAlias from Couchbase
+☐ Create DTOs and preventing to exposing the whole model to the web layer (Use Mapstruct).
