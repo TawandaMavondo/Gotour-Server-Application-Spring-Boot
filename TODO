@@ -1,6 +1,6 @@
 
 ☐ On creating user by token, Allow the auth/user endpoint to recieve user payload and prevent `username` dublicates in the database @critical
 ☐ Change the Custom DocumentType Annotation to using @TypeAlias from Couchbase
-☐ Create DTOs and preventing to exposing the whole model to the web layer (Use Mapstruct).
+☐ Create DTOs and preventing to exposing the whole model to the web layer (Use Mapstruct) @high
 Archive:
   ✔ Automatically Generate a unique username from the firstname and lastname @notrequired @done(21-08-19 10:59)
