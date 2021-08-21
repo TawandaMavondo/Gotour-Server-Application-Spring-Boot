@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import com.google.firebase.auth.FirebaseAuthException;
 
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import co.zw.gotour.server.Exception.ApiRequestException;
 import co.zw.gotour.server.Model.User;
 import co.zw.gotour.server.Service.UserService;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.slf4j.Logger;
 
 @RestController
 @Tag(name = "Authentication Endpoints")
@@ -28,13 +31,14 @@ public class AuthController {
     @Autowired
     UserService userService;
 
+    Logger logger = LoggerFactory.getLogger(AuthController.class);
+
+
     @PostMapping(value = "user")
     public ResponseEntity<User> createUser(@RequestHeader("Authorization") String authorization) {
         var token = this.getToken(authorization);
-
         try {
-            User user = this.userService.createUserByToken(token);
-            return ResponseEntity.status(HttpStatus.CREATED).body(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.createUserByToken(token));
         } catch (FirebaseAuthException e) {
             throw new ApiRequestException(e.getMessage());
         }
