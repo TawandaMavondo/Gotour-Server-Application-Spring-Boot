@@ -1,6 +1,5 @@
 package co.zw.gotour.server.Service;
 
-import co.zw.gotour.server.Model.LoginRequest;
 import co.zw.gotour.server.Model.User;
 import co.zw.gotour.server.Repository.UserRepository;
 import co.zw.gotour.server.Util.FirebaseUserMapper;
@@ -42,7 +41,7 @@ public class UserService extends AbstractService<User> {
         return super.save(entity);
     }
 
-    public User createUserByToken(String token) throws FirebaseAuthException {
+    public User createUserByToken(String token, User userDto) throws FirebaseAuthException {
         FirebaseToken firebaseToken = this.getFirebaseToken(token);
         var firebaseUser = firebaseAuth.getUser(firebaseToken.getUid());
 
@@ -53,6 +52,7 @@ public class UserService extends AbstractService<User> {
         }
 
         User user = FirebaseUserMapper.mapToUser(firebaseUser);
+        user.setUsername(userDto.getUsername());
 
         user = this.repository.save(user);
 

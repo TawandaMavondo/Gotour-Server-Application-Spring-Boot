@@ -10,15 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import co.zw.gotour.server.Exception.ApiRequestException;
 import co.zw.gotour.server.Model.User;
 import co.zw.gotour.server.Service.UserService;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 
@@ -35,17 +36,17 @@ public class AuthController {
 
 
     @PostMapping(value = "user")
-    public ResponseEntity<User> createUser(@RequestHeader("Authorization") String authorization) {
+    public ResponseEntity<User> createUser(@RequestHeader("Authorization") String authorization, @RequestBody User user) {
         var token = this.getToken(authorization);
+      //  logger.info(user.toString());
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.createUserByToken(token));
+            return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.createUserByToken(token,user));
         } catch (FirebaseAuthException e) {
             throw new ApiRequestException(e.getMessage());
         }
 
     }
     // TODO: Get user by Token.
-
     private String getToken(String authorization) {
         return authorization.replace("Bearer ", "").trim();
     }

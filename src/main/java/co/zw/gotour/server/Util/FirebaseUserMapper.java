@@ -15,7 +15,6 @@ public class FirebaseUserMapper {
 
         user.setEmail(firebaseUser.getEmail());
         user.setFirebaseId(firebaseUser.getUid());
-        // TODO: Map userRecord.getDisplayName() -> user.firstname and user.lastname
         user.setFirstname(firstname);
         user.setLastname(lastname);
         return user;
