@@ -3,6 +3,7 @@ package co.zw.gotour.server.Controller;
 import co.zw.gotour.server.Exception.ApiRequestException;
 import co.zw.gotour.server.Model.User;
 import co.zw.gotour.server.Service.UserService;
+import co.zw.gotour.server.types.QueryParam;
 import io.sentry.spring.tracing.SentrySpan;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -32,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @CrossOrigin
 
-public class UserController {
+public class UserController implements IController {
 
     @Autowired
     UserService userService;
@@ -95,6 +96,12 @@ public class UserController {
 
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Override
+    public ResponseEntity<User> query(QueryParam params) {
+        this.logger.info(params.toString());
+        return null;
     }
 
 }
