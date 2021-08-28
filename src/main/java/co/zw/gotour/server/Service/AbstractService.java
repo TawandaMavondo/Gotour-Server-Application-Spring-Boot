@@ -1,13 +1,26 @@
 package co.zw.gotour.server.Service;
 
+import co.zw.gotour.server.Configuration.CouchbaseConfiguration;
 import co.zw.gotour.server.Model.Model;
 import co.zw.gotour.server.Util.DocumentType;
+import co.zw.gotour.server.types.QueryParam;
 import io.sentry.Sentry;
 import io.sentry.spring.tracing.SentryTransaction;
 
+import java.util.List;
 import java.util.Optional;
 
+import com.couchbase.client.java.Bucket;
+import com.couchbase.client.java.Cluster;
+import com.couchbase.client.java.json.JsonArray;
+import com.couchbase.client.java.json.JsonObject;
+import com.couchbase.client.java.query.QueryOptions;
+import com.couchbase.client.java.query.QueryResult;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,11 +30,17 @@ public abstract class AbstractService<T extends Model> {
 
     private final CrudRepository<T, String> repository;
     private final Class<T> entityClass;
+    @Autowired
+    private Cluster cluster;
+
+    @Autowired
+    CouchbaseConfiguration couchbaseConfiguration;
 
     AbstractService(CrudRepository<T, String> repository, Class<T> entityClass) {
         this.repository = repository;
         this.entityClass = entityClass;
     }
+
     @Transactional
     public T save(T entity) throws Exception {
         try {
@@ -78,6 +97,33 @@ public abstract class AbstractService<T extends Model> {
             throw new NotFoundException("Document assocciated with id: " + entity.getId() + " is not found");
 
         return this.save(entity);
+    }
+
+    public Iterable<T> query(String params) {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        QueryParam queryParam = null;
+        try {
+            queryParam = objectMapper.readValue(params, QueryParam.class);
+        } catch (JsonMappingException e) {
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        Bucket bucket = this.cluster.bucket(this.couchbaseConfiguration.getBucketName());
+        String queryString = "select * from " + bucket.name() + " where _class=?";
+
+        QueryResult values = this.cluster.query(queryString,
+                QueryOptions.queryOptions().parameters(JsonArray.from(entityClass.getName())));
+
+        List results = List.of();
+
+        for (JsonObject row : values.rowsAsObject()) {
+            var value = row.get(bucket.name());
+            results.add(value);
+        }
+
+        return (Iterable<T>) results;
     }
 
 }
