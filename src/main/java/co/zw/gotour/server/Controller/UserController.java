@@ -12,6 +12,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,8 +103,21 @@ public class UserController implements IController {
     }
 
     @Override
-    public ResponseEntity<User> query(QueryParam params) {
-        this.logger.info(params.toString());
+    public ResponseEntity<User> query(String params) {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        QueryParam queryParam = null;
+        try {
+            queryParam = objectMapper.readValue(params, QueryParam.class);
+        } catch (JsonMappingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (JsonProcessingException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        this.logger.info(queryParam.toString());
         return null;
     }
 
