@@ -6,7 +6,7 @@ import co.zw.gotour.server.Util.DocumentType;
 import co.zw.gotour.server.types.QueryParam;
 import io.sentry.Sentry;
 import io.sentry.spring.tracing.SentryTransaction;
-
+// import com.couchbase.client.java.query.N1qlQuery;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,12 +16,17 @@ import com.couchbase.client.java.json.JsonArray;
 import com.couchbase.client.java.json.JsonObject;
 import com.couchbase.client.java.query.QueryOptions;
 import com.couchbase.client.java.query.QueryResult;
+import com.couchbase.client.java.query.QueryScanConsistency;
+import com.couchbase.client.java.search.SearchScanConsistency;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
+import org.springframework.data.couchbase.core.CouchbaseTemplate;
+import org.springframework.data.couchbase.core.query.N1QLQuery;
+import org.springframework.data.couchbase.core.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
@@ -35,6 +40,9 @@ public abstract class AbstractService<T extends Model> {
 
     @Autowired
     CouchbaseConfiguration couchbaseConfiguration;
+
+    @Autowired
+    CouchbaseTemplate couchbaseTemplate;
 
     AbstractService(CrudRepository<T, String> repository, Class<T> entityClass) {
         this.repository = repository;
@@ -118,12 +126,18 @@ public abstract class AbstractService<T extends Model> {
 
         List results = List.of();
 
-        for (JsonObject row : values.rowsAsObject()) {
-            var value = row.get(bucket.name());
-            results.add(value);
-        }
+        Query query = new Query();
+        query.limit(queryParam.getLimit());
 
-        return (Iterable<T>) results;
+        var ty = this.couchbaseTemplate.findByQuery(entityClass).consistentWith(QueryScanConsistency.REQUEST_PLUS)
+                .matching(query);
+
+        // for (JsonObject row : values.rowsAsObject()) {
+        // var value = row.get(bucket.name());
+        // results.add(value);
+        // }
+
+        return (Iterable<T>) ty;
     }
 
 }
