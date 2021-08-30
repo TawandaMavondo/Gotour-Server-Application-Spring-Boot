@@ -15,7 +15,6 @@ import org.springframework.data.couchbase.core.mapping.Field;
 @Document
 @DocumentType(type = "user")
 // @TypeAlias("user")
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class User extends Model {
 
     @Field

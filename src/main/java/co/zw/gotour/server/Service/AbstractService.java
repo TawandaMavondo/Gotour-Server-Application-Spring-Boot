@@ -127,6 +127,11 @@ public abstract class AbstractService<T extends Model> {
         QueryResult values = this.cluster.query(queryString,
                 QueryOptions.queryOptions().parameters(JsonArray.from(entityClass.getName())));
 
+                var  it =values.rowsAs(entityClass);
+                
+                for(T i:it){
+                    System.out.println(i.toString());
+                }
         return this.mapToTypeT(values.rowsAsObject(), bucket.name());
 
         // return List.of();
@@ -140,13 +145,13 @@ public abstract class AbstractService<T extends Model> {
 
         List<T> TObjects = new ArrayList<>();
 
-        for (JsonObject obj : values) {
-            var row = obj.get(bucketName);
-            ObjectMapper objectMapper = new ObjectMapper();
+        // for (JsonObject obj : values) {
+        //     var row = obj.get(bucketName);
+        //     ObjectMapper objectMapper = new ObjectMapper();
 
-            T entyity = objectMapper.convertValue(row, entityClass);
-            TObjects.add(entyity);
-        }
+        //     T entyity = objectMapper.convertValue(row, entityClass);
+        //     TObjects.add(entyity);
+        // }
 
         return TObjects;
 
