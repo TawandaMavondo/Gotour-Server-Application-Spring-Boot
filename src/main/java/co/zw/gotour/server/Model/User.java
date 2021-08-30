@@ -4,6 +4,8 @@ import co.zw.gotour.server.Util.DocumentType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 //import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.couchbase.core.mapping.Document;
 import org.springframework.data.couchbase.core.mapping.Field;
@@ -13,6 +15,7 @@ import org.springframework.data.couchbase.core.mapping.Field;
 @Document
 @DocumentType(type = "user")
 // @TypeAlias("user")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User extends Model {
 
     @Field

@@ -6,6 +6,8 @@ import co.zw.gotour.server.Util.DocumentType;
 import co.zw.gotour.server.types.QueryParam;
 import io.sentry.Sentry;
 import io.sentry.spring.tracing.SentryTransaction;
+
+import java.util.ArrayList;
 // import com.couchbase.client.java.query.N1qlQuery;
 import java.util.List;
 import java.util.Optional;
@@ -24,6 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
+import org.springframework.data.couchbase.core.CouchbaseOperations;
 import org.springframework.data.couchbase.core.CouchbaseTemplate;
 import org.springframework.data.couchbase.core.query.N1QLQuery;
 import org.springframework.data.couchbase.core.query.Query;
@@ -124,20 +127,30 @@ public abstract class AbstractService<T extends Model> {
         QueryResult values = this.cluster.query(queryString,
                 QueryOptions.queryOptions().parameters(JsonArray.from(entityClass.getName())));
 
-        List results = List.of();
+        return this.mapToTypeT(values.rowsAsObject(), bucket.name());
 
-        Query query = new Query();
-        query.limit(queryParam.getLimit());
-
-        var ty = this.couchbaseTemplate.findByQuery(entityClass).consistentWith(QueryScanConsistency.REQUEST_PLUS)
-                .matching(query);
-
-        // for (JsonObject row : values.rowsAsObject()) {
-        // var value = row.get(bucket.name());
-        // results.add(value);
-        // }
-
-        return (Iterable<T>) ty;
+        // return List.of();
     }
 
+    private List<T> mapToTypeT(List<JsonObject> values, String bucketName) {
+
+        if (values.isEmpty() && bucketName == null) {
+            return null;
+        }
+
+        List<T> TObjects = new ArrayList<>();
+
+        for (JsonObject obj : values) {
+            var row = obj.get(bucketName);
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            T entyity = objectMapper.convertValue(row, entityClass);
+            TObjects.add(entyity);
+        }
+
+        return TObjects;
+
+    }
+
+   
 }

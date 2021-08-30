@@ -1,5 +1,6 @@
 
 ☐ On creating user by token, Allow the auth/user endpoint to recieve user payload and prevent `username` dublicates in the database @critical
+☐ Override the typeKey() default `_class` to `entityType` spring data couchbase (MappingCouchbaseConverter.TYPEKEY_SYNCGATEWAY_COMPATIBLE) @critical
 ☐ Change the Custom DocumentType Annotation to using @TypeAlias from Couchbase
 ☐ Create DTOs and preventing to exposing the whole model to the web layer (Use Mapstruct) @high
 Archive:
