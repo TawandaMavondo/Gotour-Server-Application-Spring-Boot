@@ -1,30 +1,24 @@
 package co.zw.gotour.server.Configuration;
-
-import com.couchbase.client.java.Cluster;
-import com.couchbase.transactions.Transactions;
-
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration;
 import org.springframework.data.couchbase.repository.config.EnableReactiveCouchbaseRepositories;
-import com.couchbase.transactions.config.TransactionConfigBuilder;
+
 
 @Configuration
 @EnableReactiveCouchbaseRepositories
 public class CouchbaseConfiguration extends AbstractCouchbaseConfiguration {
     @Value("${couchbase.url}")
-    private String url ;
+    private String url;
 
     @Value("${couchbase.username}")
-    private String username ;
+    private String username;
 
     @Value("${couchbase.password}")
-    private String password ;
+    private String password;
 
     @Value("${couchbase.bucketname}")
     private String bucket;
-
 
     @Override
     public String getConnectionString() {
@@ -46,10 +40,12 @@ public class CouchbaseConfiguration extends AbstractCouchbaseConfiguration {
         return bucket;
     }
 
+    
     // @Bean
-	// public Transactions transactions(final Cluster couchbaseCluster) {
-	// 	return Transactions.create(couchbaseCluster, TransactionConfigBuilder.create()
-	// 		.build());
-	// }
+    // public Transactions transactions(final Cluster couchbaseCluster) {
+    // return Transactions.create(couchbaseCluster,
+    // TransactionConfigBuilder.create()
+    // .build());
+    // }
 
 }
