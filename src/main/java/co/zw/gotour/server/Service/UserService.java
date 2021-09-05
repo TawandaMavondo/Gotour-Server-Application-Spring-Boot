@@ -61,11 +61,11 @@ public class UserService extends AbstractService<User> {
 
     }
 
-    @Override
-    public Iterable<User> query(String params) {
+    // @Override
+    // public Iterable<User> query(String params) {
 
-        return this.repository.query("WHERE _class='" + User.class.getName() + "'", User.class);
-    }
+    //     return this.repository.query("WHERE _class='" + User.class.getName() + "'", User.class);
+    // }
 
     private FirebaseToken getFirebaseToken(String token) {
         try {

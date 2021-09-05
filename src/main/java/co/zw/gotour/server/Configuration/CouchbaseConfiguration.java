@@ -1,9 +1,11 @@
 package co.zw.gotour.server.Configuration;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.convert.WritingConverter;
 import org.springframework.data.couchbase.config.AbstractCouchbaseConfiguration;
 import org.springframework.data.couchbase.repository.config.EnableReactiveCouchbaseRepositories;
-
+import org.springframework.core.convert.converter.Converter;
 
 @Configuration
 @EnableReactiveCouchbaseRepositories
@@ -40,7 +42,17 @@ public class CouchbaseConfiguration extends AbstractCouchbaseConfiguration {
         return bucket;
     }
 
-    
+    @WritingConverter
+    public enum CustomCouchbaseConverter implements Converter<String, String> {
+        INSTANCE;
+
+        @Override
+        public String convert(String source) {
+            return source;
+        }
+
+    }
+
     // @Bean
     // public Transactions transactions(final Cluster couchbaseCluster) {
     // return Transactions.create(couchbaseCluster,

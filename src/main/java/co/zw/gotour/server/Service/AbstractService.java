@@ -8,12 +8,16 @@ import io.sentry.Sentry;
 import io.sentry.spring.tracing.SentryTransaction;
 
 import java.util.ArrayList;
-// import com.couchbase.client.java.query.N1qlQuery;
+
 import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
+import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.JavaType;
+import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.type.TypeFactory;
+import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.util.Converter;
 import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.json.JsonArray;
@@ -28,11 +32,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
+import org.springframework.data.convert.ReadingConverter;
 import org.springframework.data.couchbase.core.CouchbaseOperations;
 import org.springframework.data.couchbase.core.CouchbaseTemplate;
+import org.springframework.data.couchbase.core.convert.CouchbaseConverter;
+
+import static org.springframework.data.couchbase.core.query.N1QLExpression.*;
+
+import org.springframework.data.couchbase.core.query.N1QLExpression;
 import org.springframework.data.couchbase.core.query.N1QLQuery;
 import org.springframework.data.couchbase.core.query.Query;
+import org.springframework.data.couchbase.repository.query.support.N1qlUtils;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.core.EntityMetadata;
+import org.springframework.expression.Expression;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
 
@@ -48,6 +61,9 @@ public abstract class AbstractService<T extends Model> {
 
     @Autowired
     CouchbaseTemplate couchbaseTemplate;
+
+    @PersistenceContext
+    EntityManager entityManager;
 
     AbstractService(CrudRepository<T, String> repository, Class<T> entityClass) {
         this.repository = repository;
@@ -134,6 +150,13 @@ public abstract class AbstractService<T extends Model> {
         for (T i : it) {
             System.out.println(i.toString());
         }
+
+        N1QLExpression where = x("firstname = $1");
+        EntityMetadata<T> entityMetadata = null;
+        var statement = N1qlUtils.createSelectFromForEntity(bucket.name()).where(
+                N1qlUtils.createWhereFilterForEntity(where, this.couchbaseTemplate.getConverter(), entityMetadata));
+
+
         return this.mapToTypeT(values.rowsAsObject(), bucket.name());
 
         // return List.of();
@@ -147,16 +170,17 @@ public abstract class AbstractService<T extends Model> {
 
         List<T> TObjects = new ArrayList<>();
 
-        // for (JsonObject obj : values) {
-        // var row = obj.get(bucketName);
-        // ObjectMapper objectMapper = new ObjectMapper();
+        for (JsonObject obj : values) {
+            var row = obj.get(bucketName);
+            ObjectMapper objectMapper = new ObjectMapper();
 
-        // T entyity = objectMapper.convertValue(row, entityClass);
-        // TObjects.add(entyity);
-        // }
+            T entyity = objectMapper.convertValue(row, entityClass);
+            TObjects.add(entyity);
+        }
 
         return TObjects;
 
     }
 
+    
 }
