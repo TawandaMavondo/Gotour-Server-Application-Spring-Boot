@@ -20,6 +20,7 @@ import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.type.TypeFa
 import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.util.Converter;
 import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.Cluster;
+import com.couchbase.client.java.Scope;
 import com.couchbase.client.java.json.JsonArray;
 import com.couchbase.client.java.json.JsonObject;
 import com.couchbase.client.java.query.QueryOptions;
@@ -49,10 +50,12 @@ import org.springframework.expression.Expression;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
 
+
 public abstract class AbstractService<T extends Model> {
 
     private final CrudRepository<T, String> repository;
     private final Class<T> entityClass;
+    private Bucket bucket;
     @Autowired
     private Cluster cluster;
 
@@ -68,6 +71,8 @@ public abstract class AbstractService<T extends Model> {
     AbstractService(CrudRepository<T, String> repository, Class<T> entityClass) {
         this.repository = repository;
         this.entityClass = entityClass;
+        this.bucket = this.cluster.bucket(this.couchbaseConfiguration.getBucketName());
+
     }
 
     @Transactional
@@ -139,48 +144,8 @@ public abstract class AbstractService<T extends Model> {
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        Bucket bucket = this.cluster.bucket(this.couchbaseConfiguration.getBucketName());
-        String queryString = "select * from " + bucket.name() + " where _class=?";
 
-        QueryResult values = this.cluster.query(queryString,
-                QueryOptions.queryOptions().parameters(JsonArray.from(entityClass.getName())));
-
-        var it = values.rowsAs(entityClass);
-
-        for (T i : it) {
-            System.out.println(i.toString());
-        }
-
-        N1QLExpression where = x("firstname = $1");
-        EntityMetadata<T> entityMetadata = null;
-        var statement = N1qlUtils.createSelectFromForEntity(bucket.name()).where(
-                N1qlUtils.createWhereFilterForEntity(where, this.couchbaseTemplate.getConverter(), entityMetadata));
-
-
-        return this.mapToTypeT(values.rowsAsObject(), bucket.name());
-
-        // return List.of();
+        return null;
     }
 
-    private List<T> mapToTypeT(List<JsonObject> values, String bucketName) {
-
-        if (values.isEmpty() && bucketName == null) {
-            return null;
-        }
-
-        List<T> TObjects = new ArrayList<>();
-
-        for (JsonObject obj : values) {
-            var row = obj.get(bucketName);
-            ObjectMapper objectMapper = new ObjectMapper();
-
-            T entyity = objectMapper.convertValue(row, entityClass);
-            TObjects.add(entyity);
-        }
-
-        return TObjects;
-
-    }
-
-    
 }

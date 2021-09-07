@@ -4,7 +4,7 @@ import co.zw.gotour.server.Model.User;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface UserRepository extends CrudRepository<User, String>, BaseRepository<User> {
+public interface UserRepository extends CrudRepository<User, String> {
 
     public User findByUsername(String username);
 
