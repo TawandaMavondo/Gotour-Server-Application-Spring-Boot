@@ -36,6 +36,7 @@ public class ApplicationSetup implements ApplicationListener<ContextRefreshedEve
         this.createIndexIfNotExist("Index_entityType", List.of("entityType"));
         this.createIndexIfNotExist("Index_username", List.of("username"));
         this.createIndexIfNotExist("index_class", List.of("_class"));
+        this.createCollectionsIfNotExist("sadza");
 
     }
 
@@ -62,6 +63,13 @@ public class ApplicationSetup implements ApplicationListener<ContextRefreshedEve
             logger.error(e.getMessage());
         }
 
+    }
+
+    public void createCollectionsIfNotExist(String collectionName) {
+
+        String queryString = "CREATE COLLECTION " + collectionName;
+
+        this.couchbaseCluster.query(queryString);
     }
 
 }
