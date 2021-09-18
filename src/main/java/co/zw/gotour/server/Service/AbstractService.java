@@ -78,13 +78,17 @@ public abstract class AbstractService<T extends Model> {
     @Transactional
     public T save(T entity) throws Exception {
         try {
+            // Apa ndipo patinoita destructure the DocumentType Annotation.
+            // Can throw an Exception.
             var annotation = this.entityClass.getAnnotationsByType(DocumentType.class)[0];
+            // Tinotora type string value and set it to the entityType field.
             entity.entityType = annotation.type();
             return this.repository.save(entity);
         } catch (Exception e) {
             if (e instanceof IndexOutOfBoundsException) {
                 throw new IllegalArgumentException("The @DocumentType Annotation is required for all Model Classes");
             }
+            // Sentry APM capture the Exception.
             Sentry.captureException(e);
             throw new Exception(e);
         }
