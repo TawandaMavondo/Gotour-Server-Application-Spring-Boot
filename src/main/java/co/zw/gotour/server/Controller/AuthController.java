@@ -29,23 +29,25 @@ import org.slf4j.Logger;
 @CrossOrigin
 public class AuthController {
 
-    @Autowired
-    UserService userService;
+    // @Autowired
+    // UserService userService;
 
     Logger logger = LoggerFactory.getLogger(AuthController.class);
 
-
     @PostMapping(value = "user")
-    public ResponseEntity<User> createUser(@RequestHeader("Authorization") String authorization, @RequestBody User user) {
+    public ResponseEntity<User> createUser(@RequestHeader("Authorization") String authorization,
+            @RequestBody User user) {
         var token = this.getToken(authorization);
-      //  logger.info(user.toString());
+        // logger.info(user.toString());
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.userService.createUserByToken(token,user));
+            throw new FirebaseAuthException(null);
+            // ResponseEntity.status(HttpStatus.CREATED).body(this.userService.createUserByToken(token,user));
         } catch (FirebaseAuthException e) {
             throw new ApiRequestException(e.getMessage());
         }
 
     }
+
     // TODO: Get user by Token.
     private String getToken(String authorization) {
         return authorization.replace("Bearer ", "").trim();

@@ -34,10 +34,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @CrossOrigin
 
-public class UserController implements IController {
+public class UserController  {
 
-    @Autowired
-    UserService userService;
+    // @Autowired
+    UserService userService =null;
 
     private final Logger logger = LogManager.getLogger();
 
@@ -99,7 +99,7 @@ public class UserController implements IController {
         this.userService = userService;
     }
 
-    @Override
+    // @Override
     public ResponseEntity<User> query(String params) {
         
 
