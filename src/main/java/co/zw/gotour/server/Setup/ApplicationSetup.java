@@ -2,6 +2,7 @@ package co.zw.gotour.server.Setup;
 
 import java.util.List;
 
+import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.manager.query.QueryIndex;
 
@@ -36,6 +37,7 @@ public class ApplicationSetup implements ApplicationListener<ContextRefreshedEve
         this.createIndexIfNotExist("Index_entityType", List.of("entityType"));
         this.createIndexIfNotExist("Index_username", List.of("username"));
         this.createIndexIfNotExist("index_class", List.of("_class"));
+        this.createCollectionIfNotExist("Nyama");
 
     }
 
@@ -62,6 +64,15 @@ public class ApplicationSetup implements ApplicationListener<ContextRefreshedEve
             logger.error(e.getMessage());
         }
 
+    }
+
+    public void createCollectionIfNotExist(String collection) {
+        String statement = "CREATE COLLECTION " + collection;
+        Bucket bucket = this.couchbaseCluster.bucket(this.bucket);
+        // this.couchbaseCluster.query(statement);
+
+        // if (bucket.collection(collection) == null) {
+        // }
     }
 
 }
