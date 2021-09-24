@@ -67,7 +67,7 @@ public class ApplicationSetup implements ApplicationListener<ContextRefreshedEve
     }
 
     public void createCollectionIfNotExist(String collection) {
-        String statement = "CREATE COLLECTION " + collection;
+        String statement = "CREATE COLLECTION `" + collection +"`";
         Bucket bucket = this.couchbaseCluster.bucket(this.bucket);
         // this.couchbaseCluster.query(statement);
 
