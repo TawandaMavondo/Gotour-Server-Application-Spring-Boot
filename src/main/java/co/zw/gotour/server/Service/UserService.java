@@ -4,7 +4,6 @@ import co.zw.gotour.server.Model.User;
 import co.zw.gotour.server.Repository.UserRepository;
 import co.zw.gotour.server.Util.FirebaseUserMapper;
 
-import com.couchbase.client.java.Cluster;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;

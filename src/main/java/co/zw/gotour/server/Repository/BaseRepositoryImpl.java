@@ -9,6 +9,8 @@ import javax.persistence.Query;
 import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.Cluster;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -26,6 +28,7 @@ public class BaseRepositoryImpl<T extends Model> implements BaseRepository<T> {
 
     @Autowired
     CouchbaseConfiguration couchbaseConfiguration;
+    Logger logger = LoggerFactory.getLogger(BaseRepositoryImpl.class);
 
     @Override
     public List<T> query(String where, Class<T> entityClass) {
@@ -33,7 +36,10 @@ public class BaseRepositoryImpl<T extends Model> implements BaseRepository<T> {
 
         Query query = entityManager.createQuery("SELECT * FROM " + bucket.name() + " " + where, entityClass);
 
-        return (List<T>) query.getResultList();
+        this.logger.info("The Query Function has been excercuted");
+        return null;
+
+        // return (List<T>) query.getResultList();
 
     }
 

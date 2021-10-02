@@ -129,37 +129,10 @@ public abstract class AbstractService<T extends Model> {
     }
 
     public Iterable<T> query(String params) {
-        ObjectMapper objectMapper = new ObjectMapper();
 
-        QueryParam queryParam = null;
-        try {
-            queryParam = objectMapper.readValue(params, QueryParam.class);
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-        Bucket bucket = this.cluster.bucket(this.couchbaseConfiguration.getBucketName());
-        String queryString = "select * from " + bucket.name() + " where _class=?";
+        // this.repository.query()
 
-        QueryResult values = this.cluster.query(queryString,
-                QueryOptions.queryOptions().parameters(JsonArray.from(entityClass.getName())));
-
-        var it = values.rowsAs(entityClass);
-
-        for (T i : it) {
-            System.out.println(i.toString());
-        }
-
-        N1QLExpression where = x("firstname = $1");
-        EntityMetadata<T> entityMetadata = null;
-        var statement = N1qlUtils.createSelectFromForEntity(bucket.name()).where(
-                N1qlUtils.createWhereFilterForEntity(where, this.couchbaseTemplate.getConverter(), entityMetadata));
-
-
-        return this.mapToTypeT(values.rowsAsObject(), bucket.name());
-
-        // return List.of();
+      return null;
     }
 
     private List<T> mapToTypeT(List<JsonObject> values, String bucketName) {
