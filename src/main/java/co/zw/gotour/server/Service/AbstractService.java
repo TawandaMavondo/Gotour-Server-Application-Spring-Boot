@@ -123,7 +123,7 @@ public abstract class AbstractService<T extends Model> {
         Optional<T> findEntity = this.repository.findById(entity.getId());
 
         if (findEntity.isEmpty())
-            throw new NotFoundException("Document assocciated with id: " + entity.getId() + " is not found");
+            throw new NotFoundException("Document associated with id: " + entity.getId() + " is not found");
 
         return this.save(entity);
     }
@@ -135,25 +135,5 @@ public abstract class AbstractService<T extends Model> {
       return null;
     }
 
-    private List<T> mapToTypeT(List<JsonObject> values, String bucketName) {
 
-        if (values.isEmpty() && bucketName == null) {
-            return null;
-        }
-
-        List<T> TObjects = new ArrayList<>();
-
-        for (JsonObject obj : values) {
-            var row = obj.get(bucketName);
-            ObjectMapper objectMapper = new ObjectMapper();
-
-            T entyity = objectMapper.convertValue(row, entityClass);
-            TObjects.add(entyity);
-        }
-
-        return TObjects;
-
-    }
-
-    
 }
