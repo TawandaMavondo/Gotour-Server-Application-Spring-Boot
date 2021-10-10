@@ -32,11 +32,10 @@ public abstract class AbstractCouchbaseRepository<T extends Model> {
         this.configuration = configuration;
         this.bucket = this.cluster.bucket(this.configuration.getBucketName());
         CollectionManager collectionManager = this.bucket.collections();
-        CreateCollectionOptions options;
         try {
             CollectionSpec collectionSpec = CollectionSpec.create(collectionName,
-                    this.bucket.defaultCollection().name());
-            collectionManager.createCollection(collectionSpec);
+                    this.bucket.defaultCollection().scopeName());
+            // collectionManager.createCollection(collectionSpec);
             Thread.sleep(15000);
         } catch (CollectionExistsException e) {
             // Collection Exists

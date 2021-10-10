@@ -2,8 +2,11 @@ package co.zw.gotour.server.Setup;
 
 import java.util.List;
 
+import com.couchbase.client.core.error.CollectionExistsException;
 import com.couchbase.client.java.Bucket;
 import com.couchbase.client.java.Cluster;
+import com.couchbase.client.java.manager.collection.CollectionManager;
+import com.couchbase.client.java.manager.collection.CollectionSpec;
 import com.couchbase.client.java.manager.query.QueryIndex;
 
 import org.slf4j.Logger;
@@ -67,8 +70,19 @@ public class ApplicationSetup implements ApplicationListener<ContextRefreshedEve
     }
 
     public void createCollectionIfNotExist(String collection) {
-        String statement = "CREATE COLLECTION `" + collection +"`";
+        String statement = "CREATE COLLECTION `" + collection + "`";
         Bucket bucket = this.couchbaseCluster.bucket(this.bucket);
+        CollectionManager collectionManager = bucket.collections();
+
+        try {
+            CollectionSpec collectionSpec = CollectionSpec.create(collection, bucket.defaultCollection().scopeName());
+            collectionManager.createCollection(collectionSpec);
+        } catch (CollectionExistsException e) {
+            // TODO: handle exception
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         // this.couchbaseCluster.query(statement);
 
         // if (bucket.collection(collection) == null) {
