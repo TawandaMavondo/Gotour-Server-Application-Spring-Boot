@@ -6,7 +6,9 @@ import com.couchbase.client.java.Cluster;
 import com.couchbase.client.java.Collection;
 import com.couchbase.client.java.manager.collection.CollectionManager;
 import com.couchbase.client.java.manager.collection.CollectionSpec;
+import com.couchbase.client.java.manager.collection.CreateCollectionOptions;
 
+import co.zw.gotour.server.Configuration.CouchbaseConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,16 +16,23 @@ import co.zw.gotour.server.Model.Model;
 
 public abstract class AbstractCouchbaseRepository<T extends Model> {
 
-    @Autowired
     private Bucket bucket;
 
-    @Autowired
-    private Cluster cluster;
+    @Autowired(required = true)
+    protected Cluster cluster;
+
+    @Autowired(required = true)
+    CouchbaseConfiguration configuration;
 
     private Collection collection;
 
-    AbstractCouchbaseRepository(Class<T> entityType, String collectionName) {
+    AbstractCouchbaseRepository(String collectionName, Class<T> entityType, Cluster cluster,
+            CouchbaseConfiguration configuration) {
+        this.cluster = cluster;
+        this.configuration = configuration;
+        this.bucket = this.cluster.bucket(this.configuration.getBucketName());
         CollectionManager collectionManager = this.bucket.collections();
+        CreateCollectionOptions options;
         try {
             CollectionSpec collectionSpec = CollectionSpec.create(collectionName,
                     this.bucket.defaultCollection().name());
