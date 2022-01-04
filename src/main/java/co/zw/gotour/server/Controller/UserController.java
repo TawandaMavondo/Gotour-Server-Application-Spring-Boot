@@ -3,7 +3,6 @@ package co.zw.gotour.server.Controller;
 import co.zw.gotour.server.Exception.ApiRequestException;
 import co.zw.gotour.server.Model.User;
 import co.zw.gotour.server.Service.UserService;
-import co.zw.gotour.server.types.QueryParam;
 import io.sentry.spring.tracing.SentrySpan;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -11,8 +10,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +42,7 @@ public class UserController implements IController {
     @SentrySpan
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Successfully Created User ", content = @Content(schema = @Schema(implementation = User.class))),
-            // TODO: Later insert the content of the Global Custon APIException Handler
+            // TODO: Later insert the content of the Global Custom APIException Handler
             @ApiResponse(responseCode = "400", description = "Username Already Exists") })
     public ResponseEntity<Object> createUser(@RequestBody User user) {
 
@@ -101,8 +98,6 @@ public class UserController implements IController {
 
     @Override
     public ResponseEntity<User> query(String params) {
-        
-
         this.logger.info(this.userService.query(params).toString());
         return null;
     }

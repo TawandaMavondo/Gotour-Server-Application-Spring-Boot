@@ -53,17 +53,6 @@ public abstract class AbstractService<T extends Model> {
 
     private final CrudRepository<T, String> repository;
     private final Class<T> entityClass;
-    @Autowired
-    private Cluster cluster;
-
-    @Autowired
-    CouchbaseConfiguration couchbaseConfiguration;
-
-    @Autowired
-    CouchbaseTemplate couchbaseTemplate;
-
-    @PersistenceContext
-    EntityManager entityManager;
 
     AbstractService(CrudRepository<T, String> repository, Class<T> entityClass) {
         this.repository = repository;
@@ -73,8 +62,8 @@ public abstract class AbstractService<T extends Model> {
     @Transactional
     public T save(T entity) throws Exception {
         try {
-            var annotation = this.entityClass.getAnnotationsByType(DocumentType.class)[0];
-            entity.entityType = annotation.type();
+//            var annotation = this.entityClass.getAnnotationsByType(DocumentType.class)[0];
+//            entity.entityType = annotation.type();
             return this.repository.save(entity);
         } catch (Exception e) {
             if (e instanceof IndexOutOfBoundsException) {

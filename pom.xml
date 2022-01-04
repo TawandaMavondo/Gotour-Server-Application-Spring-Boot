@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-couchbase</artifactId>
-			<version>4.1.1</version>
+			<version>4.3.0-M3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -87,6 +87,18 @@
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
 			<version>1.4.2.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-couchbase</artifactId>
+			<!-- -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.data</groupId>
+					<artifactId>spring-data-couchbase</artifactId>
+				</exclusion>
+			</exclusions>
+			<!-- -->
 		</dependency>
 
 		<dependency>
@@ -132,7 +144,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-couchbase</artifactId>
-			<version>4.2.4</version>
+			<version>4.2.5</version>
 		</dependency>
 	</dependencies>
 

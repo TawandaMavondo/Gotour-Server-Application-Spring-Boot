@@ -26,10 +26,8 @@ public abstract class AbstractCouchbaseRepository<T extends Model> {
 
     private Collection collection;
 
-    AbstractCouchbaseRepository(String collectionName, Class<T> entityType, Cluster cluster,
-            CouchbaseConfiguration configuration) {
+    AbstractCouchbaseRepository(String collectionName,Cluster cluster) {
         this.cluster = cluster;
-        this.configuration = configuration;
         this.bucket = this.cluster.bucket(this.configuration.getBucketName());
         CollectionManager collectionManager = this.bucket.collections();
         try {

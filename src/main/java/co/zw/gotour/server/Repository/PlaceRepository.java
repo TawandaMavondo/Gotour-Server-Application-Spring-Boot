@@ -14,7 +14,7 @@ public class PlaceRepository extends AbstractCouchbaseRepository<User> {
 
     @Autowired
     PlaceRepository(Cluster cluster, CouchbaseConfiguration configuration) {
-        super("user", User.class, cluster, configuration);
+        super("user",  cluster);
     }
 
 }
