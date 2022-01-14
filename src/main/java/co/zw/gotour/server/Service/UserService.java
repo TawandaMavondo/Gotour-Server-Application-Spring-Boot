@@ -30,7 +30,6 @@ public class UserService extends AbstractService<User> {
 
     @Override
     public User save(User entity) throws Exception {
-        entity = (User) entity;
         User user = this.repository.findByUsername(entity.getUsername());
         if (user == null)
             return super.save(entity);
