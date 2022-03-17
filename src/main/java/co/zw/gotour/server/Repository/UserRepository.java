@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.data.couchbase.repository.Collection;
 
 @Repository("userRepository")
-@Scope("_default")
 @Collection("user")
 @ScanConsistency(query = QueryScanConsistency.REQUEST_PLUS)
 public interface UserRepository extends CrudRepository<User, String> {

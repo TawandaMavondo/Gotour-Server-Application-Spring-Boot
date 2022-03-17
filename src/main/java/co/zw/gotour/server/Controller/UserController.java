@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = "/user")
 @RequiredArgsConstructor
 @CrossOrigin
-
 public class UserController implements IController {
 
     @Autowired

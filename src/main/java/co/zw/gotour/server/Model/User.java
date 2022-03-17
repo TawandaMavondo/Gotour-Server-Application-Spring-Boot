@@ -6,11 +6,12 @@ import lombok.EqualsAndHashCode;
 //import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.couchbase.core.mapping.Document;
 import org.springframework.data.couchbase.core.mapping.Field;
+import org.springframework.data.couchbase.repository.Collection;
 
 @Data
 @EqualsAndHashCode
 @Document
-// @TypeAlias("user")
+@Collection("user")
 public class User extends Model {
 
     @Field
