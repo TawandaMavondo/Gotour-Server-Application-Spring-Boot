@@ -42,22 +42,10 @@ public class CouchbaseConfiguration extends AbstractCouchbaseConfiguration {
         return bucket;
     }
 
-    @WritingConverter
-    public enum CustomCouchbaseConverter implements Converter<String, String> {
-        INSTANCE;
-
-        @Override
-        public String convert(String source) {
-            return source;
-        }
-
+    @Override
+    protected String getScopeName() {
+        return null;
     }
 
-    // @Bean
-    // public Transactions transactions(final Cluster couchbaseCluster) {
-    // return Transactions.create(couchbaseCluster,
-    // TransactionConfigBuilder.create()
-    // .build());
-    // }
 
 }

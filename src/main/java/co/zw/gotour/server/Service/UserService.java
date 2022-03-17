@@ -24,7 +24,7 @@ public class UserService extends AbstractService<User> {
 
     @Autowired
     public UserService(UserRepository userRepository) {
-        super(userRepository, User.class);
+        super(userRepository);
         this.repository = userRepository;
     }
 
@@ -58,12 +58,6 @@ public class UserService extends AbstractService<User> {
         return user;
 
     }
-
-    // @Override
-    // public Iterable<User> query(String params) {
-
-    //     return this.repository.query("WHERE _class='" + User.class.getName() + "'", User.class);
-    // }
 
     private FirebaseToken getFirebaseToken(String token) {
         try {

@@ -1,62 +1,21 @@
 package co.zw.gotour.server.Service;
 
-import co.zw.gotour.server.Configuration.CouchbaseConfiguration;
 import co.zw.gotour.server.Model.Model;
-import co.zw.gotour.server.Util.DocumentType;
-import co.zw.gotour.server.types.QueryParam;
 import io.sentry.Sentry;
 import io.sentry.spring.tracing.SentryTransaction;
-
-import java.util.ArrayList;
-
-import java.util.List;
-import java.util.Optional;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.JavaType;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.type.TypeFactory;
-import com.couchbase.client.core.deps.com.fasterxml.jackson.databind.util.Converter;
-import com.couchbase.client.java.Bucket;
-import com.couchbase.client.java.Cluster;
-import com.couchbase.client.java.json.JsonArray;
-import com.couchbase.client.java.json.JsonObject;
-import com.couchbase.client.java.query.QueryOptions;
-import com.couchbase.client.java.query.QueryResult;
-import com.couchbase.client.java.query.QueryScanConsistency;
-import com.couchbase.client.java.search.SearchScanConsistency;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
-import org.springframework.data.convert.ReadingConverter;
-import org.springframework.data.couchbase.core.CouchbaseOperations;
-import org.springframework.data.couchbase.core.CouchbaseTemplate;
-import org.springframework.data.couchbase.core.convert.CouchbaseConverter;
-
-import static org.springframework.data.couchbase.core.query.N1QLExpression.*;
-
-import org.springframework.data.couchbase.core.query.N1QLExpression;
-import org.springframework.data.couchbase.core.query.N1QLQuery;
-import org.springframework.data.couchbase.core.query.Query;
-import org.springframework.data.couchbase.repository.query.support.N1qlUtils;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.core.EntityMetadata;
-import org.springframework.expression.Expression;
 import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
+
+import java.util.Optional;
 
 public abstract class AbstractService<T extends Model> {
 
     private final CrudRepository<T, String> repository;
-    private final Class<T> entityClass;
 
-    AbstractService(CrudRepository<T, String> repository, Class<T> entityClass) {
+    AbstractService(CrudRepository<T, String> repository) {
         this.repository = repository;
-        this.entityClass = entityClass;
     }
 
     @Transactional
