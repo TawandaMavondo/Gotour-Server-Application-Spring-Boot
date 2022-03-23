@@ -21,13 +21,9 @@ public abstract class AbstractService<T extends Model> {
     @Transactional
     public T save(T entity) throws Exception {
         try {
-//            var annotation = this.entityClass.getAnnotationsByType(DocumentType.class)[0];
-//            entity.entityType = annotation.type();
+//
             return this.repository.save(entity);
-        } catch (Exception e) {
-            if (e instanceof IndexOutOfBoundsException) {
-                throw new IllegalArgumentException("The @DocumentType Annotation is required for all Model Classes");
-            }
+        } catch (Exception e){
             Sentry.captureException(e);
             throw new Exception(e);
         }
@@ -78,7 +74,8 @@ public abstract class AbstractService<T extends Model> {
 
     public Iterable<T> query(String params) {
 
-        // this.repository.query()
+//        @TODO: implement advanced query using spring data jpa couchbase
+
 
       return null;
     }

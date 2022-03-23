@@ -3,6 +3,8 @@ package co.zw.gotour.server.Configuration;
 import javax.persistence.EntityManagerFactory;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.boot.web.server.WebServerFactoryCustomizer;
+import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 //import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -16,11 +18,10 @@ public class AppConfiguration {
     return builder.build();
   }
 
-  // @Bean
-  // public EntityManagerFactory entityManagerFactory() {
-  //   LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-
-  //   return null;
-  // }
+  @Bean
+  public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory>
+  webServerFactoryCustomizer() {
+    return factory -> factory.setContextPath("/api/v1");
+  }
 
 }

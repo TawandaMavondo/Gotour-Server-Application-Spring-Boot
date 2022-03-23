@@ -1,5 +1,6 @@
 package co.zw.gotour.server;
 
+import com.google.firebase.auth.FirebaseAuth;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -20,13 +21,16 @@ class UserServiceTest {
 	private UserService userService;
 
 	@Mock
-	public UserRepository userRepository;
+	private UserRepository userRepository;
+
+	@Mock
+	private FirebaseAuth firebaseAuth;
 
 	@BeforeEach
 	void setup() {
 		MockitoAnnotations.openMocks(this);
 		this.userService = mock(UserService.class);
-		this.userService = new UserService(userRepository);
+		this.userService = new UserService(userRepository,this.firebaseAuth);
 	}
 
 	// @Test

@@ -42,10 +42,5 @@ public class CouchbaseConfiguration extends AbstractCouchbaseConfiguration {
         return bucket;
     }
 
-//    @Override
-//    protected String getScopeName() {
-//        return null;
-//    }
-
 
 }

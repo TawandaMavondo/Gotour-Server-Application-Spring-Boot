@@ -19,13 +19,13 @@ public class UserService extends AbstractService<User> {
     UserRepository repository;
     Logger logger = LoggerFactory.getLogger(UserService.class);
 
-    @Autowired
     FirebaseAuth firebaseAuth;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository,FirebaseAuth firebaseAuth) {
         super(userRepository);
         this.repository = userRepository;
+        this.firebaseAuth = firebaseAuth;
     }
 
     @Override

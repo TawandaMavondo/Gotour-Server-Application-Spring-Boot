@@ -27,15 +27,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @Tag(name = "User Endpoints")
-@RequestMapping(path = "/user")
+@RequestMapping(path = "user")
 @RequiredArgsConstructor
 @CrossOrigin
 public class UserController implements IController {
 
-    @Autowired
+
     UserService userService;
 
     private final Logger logger = LogManager.getLogger();
+
+    @Autowired
+    public UserController(UserService userService){
+        this.userService = userService;
+    }
+
 
     @PostMapping()
     @SentrySpan

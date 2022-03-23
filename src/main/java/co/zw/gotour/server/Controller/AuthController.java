@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import com.google.firebase.auth.FirebaseAuthException;
 
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ import org.slf4j.Logger;
 
 @RestController
 @Tag(name = "Authentication Endpoints")
-@RequestMapping("/auth")
+@RequestMapping("auth")
 @CrossOrigin
 public class AuthController {
 
@@ -47,7 +48,7 @@ public class AuthController {
 
     }
     // TODO: Get user by Token.
-    private String getToken(String authorization) {
+    private @NotNull String getToken(@NotNull String authorization) {
         return authorization.replace("Bearer ", "").trim();
     }
 }

@@ -22,15 +22,20 @@ import io.sentry.Sentry;
 @Component
 public class ApplicationSetup implements ApplicationListener<ContextRefreshedEvent> {
 
-    @Autowired
     Cluster couchbaseCluster;
 
-    @Autowired
     CouchbaseConfiguration couchbaseConfiguration;
 
     List<QueryIndex> indexes = List.of();
 
     private String bucket;
+
+
+    @Autowired
+    public ApplicationSetup(Cluster couchbaseCluster, CouchbaseConfiguration couchbaseConfiguration){
+        this.couchbaseCluster = couchbaseCluster;
+        this.couchbaseConfiguration = couchbaseConfiguration;
+    }
 
     Logger logger = LoggerFactory.getLogger(ApplicationSetup.class);
 
