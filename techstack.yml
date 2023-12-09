@@ -1,0 +1,226 @@
+repo_name: TawandaMavondo/Gotour-Server-Application-Spring-Boot
+report_id: e15ae676b74a4653cfab3490cc10709a
+repo_type: Public
+timestamp: '2023-12-09T20:08:12+00:00'
+requested_by: TawandaMavondo
+provider: github
+branch: master
+detected_tools_count: 19
+tools:
+- name: Java
+  description: A concurrent, class-based, object-oriented, language specifically designed
+    to have as few implementation dependencies as possible
+  website_url: https://www.java.com
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/995/K85ZWV2F.png
+  detection_source: Repo Metadata
+- name: Java EE
+  description: The standard in community-driven enterprise software
+  website_url: http://www.oracle.com/technetwork/java/javaee/overview/index.html
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Languages
+  image_url: https://img.stackshare.io/service/4522/652rxwyK_400x400.png
+  detection_source: pom.xml
+  last_updated_by: Tawanda
+  last_updated_on: 2021-08-07 21:10:30.000000000 Z
+- name: QueryDSL
+  description: Unified queries for Java
+  website_url: http://www.querydsl.com/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Database Tools
+  image_url: https://img.stackshare.io/service/3881/da8da0c0e6dfbfc596f787ade49381a6_400x400.png
+  detection_source: pom.xml
+  last_updated_by: Tawanda
+  last_updated_on: 2021-09-05 16:19:08.000000000 Z
+- name: Spring Framework
+  description: An application framework and inversion of control container for the
+    Java platform
+  website_url: https://spring.io/projects/spring-framework
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Languages & Frameworks
+  sub_category: Frameworks (Full Stack)
+  image_url: https://img.stackshare.io/service/2006/spring-framework-project-logo.png
+  detection_source: pom.xml
+  last_updated_by: Tawanda
+  last_updated_on: 2021-09-05 16:19:08.000000000 Z
+- name: Couchbase
+  description: Document-Oriented NoSQL Database
+  website_url: http://www.couchbase.com/
+  open_source: false
+  hosted_saas: true
+  category: Data Stores
+  sub_category: Databases
+  image_url: https://img.stackshare.io/service/1089/KMIbGY8C.png
+  detection_source: pom.xml
+  last_updated_by: Tawanda
+  last_updated_on: 2021-09-05 16:19:08.000000000 Z
+- name: HBase
+  description: The Hadoop database, a distributed, scalable, big data store
+  website_url: http://hbase.apache.org/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Data Stores
+  sub_category: Databases
+  image_url: https://img.stackshare.io/service/1043/HBase-Twitter3.png
+  detection_source: pom.xml
+  last_updated_by: Tawanda
+  last_updated_on: 2021-08-07 21:10:30.000000000 Z
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source: Repo Metadata
+- name: Apache Camel
+  description: A versatile open source integration framework
+  website_url: https://camel.apache.org/
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Application Hosting
+  sub_category: Platform as a Service
+  image_url: https://img.stackshare.io/service/3276/xWt1RFo6_400x400.jpg
+  detection_source: src/main/resources/application.properties
+  last_updated_by: Tawanda
+  last_updated_on: 2021-08-07 23:03:11.000000000 Z
+- name: com.couchbase.client:java-client
+  description: The official Couchbase Java SDK
+  version: 3.2.1
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
+  detection_source: pom.xml
+  last_updated_by: Tawanda
+  last_updated_on: 2021-09-05 16:19:08.000000000 Z
+- name: com.querydsl:querydsl-apt
+  open_source: false
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source: pom.xml
+  last_updated_by: Tawanda
+  last_updated_on: 2021-09-05 16:19:08.000000000 Z
+- name: com.querydsl:querydsl-jpa
+  open_source: false
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source: pom.xml
+  last_updated_by: Tawanda
+  last_updated_on: 2021-09-05 16:19:08.000000000 Z
+- name: javax:javaee-api
+  description: Java
+  version: 8.0.1
+  license: GPL-2.0-with-classpath-exception
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
+  detection_source: pom.xml
+  last_updated_by: Tawanda
+  last_updated_on: 2021-09-05 16:19:08.000000000 Z
+- name: org.assertj:assertj-core
+  description: Rich and fluent assertions for testing for Java
+  version: 3.19.0
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
+  detection_source: pom.xml
+  last_updated_by: Tawanda
+  last_updated_on: 2021-09-05 16:19:08.000000000 Z
+- name: org.jetbrains:annotations
+  description: A set of annotations used for code inspection support and code documentation
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source: pom.xml
+  last_updated_by: Tawanda
+  last_updated_on: 2021-09-05 16:19:08.000000000 Z
+- name: org.mockito:mockito-inline
+  description: Mockito preconfigured inline mock maker
+  version: 3.11.2
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
+  detection_source: pom.xml
+  last_updated_by: Tawanda
+  last_updated_on: 2021-09-05 16:19:08.000000000 Z
+- name: org.projectlombok:lombok
+  description: 'Spice up your java: Automatic Resource Management'
+  license: MIT
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source: pom.xml
+  last_updated_by: Tawanda
+  last_updated_on: 2021-09-05 16:19:08.000000000 Z
+- name: org.springframework.boot:spring-boot-starter
+  description: Core starter
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source: pom.xml
+  last_updated_by: Tawanda
+  last_updated_on: 2021-09-05 16:19:08.000000000 Z
+- name: org.springframework.boot:spring-boot-starter-test
+  description: Starter for testing Spring Boot applications with libraries including
+    JUnit
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source: pom.xml
+  last_updated_by: Tawanda
+  last_updated_on: 2021-09-05 16:19:08.000000000 Z
+- name: org.springframework.boot:spring-boot-starter-web
+  description: Starter for building web, including RESTful, applications using Spring
+    MVC
+  license: Apache-2.0
+  open_source: true
+  hosted_saas: false
+  category: Libraries
+  sub_category: Maven Packages
+  image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source: pom.xml
+  last_updated_by: Tawanda
+  last_updated_on: 2021-09-05 16:19:08.000000000 Z
