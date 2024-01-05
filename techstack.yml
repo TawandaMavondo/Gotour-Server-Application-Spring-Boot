@@ -1,7 +1,8 @@
 repo_name: TawandaMavondo/Gotour-Server-Application-Spring-Boot
 report_id: e15ae676b74a4653cfab3490cc10709a
+version: 0.1
 repo_type: Public
-timestamp: '2023-12-09T20:08:12+00:00'
+timestamp: '2024-01-05T08:26:54+00:00'
 requested_by: TawandaMavondo
 provider: github
 branch: master
@@ -16,6 +17,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/995/K85ZWV2F.png
+  detection_source_url: https://github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot
   detection_source: Repo Metadata
 - name: Java EE
   description: The standard in community-driven enterprise software
@@ -25,6 +27,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Languages
   image_url: https://img.stackshare.io/service/4522/652rxwyK_400x400.png
+  detection_source_url: https://github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
   detection_source: pom.xml
   last_updated_by: Tawanda
   last_updated_on: 2021-08-07 21:10:30.000000000 Z
@@ -37,6 +40,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Database Tools
   image_url: https://img.stackshare.io/service/3881/da8da0c0e6dfbfc596f787ade49381a6_400x400.png
+  detection_source_url: https://github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
   detection_source: pom.xml
   last_updated_by: Tawanda
   last_updated_on: 2021-09-05 16:19:08.000000000 Z
@@ -50,6 +54,7 @@ tools:
   category: Languages & Frameworks
   sub_category: Frameworks (Full Stack)
   image_url: https://img.stackshare.io/service/2006/spring-framework-project-logo.png
+  detection_source_url: https://github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
   detection_source: pom.xml
   last_updated_by: Tawanda
   last_updated_on: 2021-09-05 16:19:08.000000000 Z
@@ -61,6 +66,7 @@ tools:
   category: Data Stores
   sub_category: Databases
   image_url: https://img.stackshare.io/service/1089/KMIbGY8C.png
+  detection_source_url: https://github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
   detection_source: pom.xml
   last_updated_by: Tawanda
   last_updated_on: 2021-09-05 16:19:08.000000000 Z
@@ -73,6 +79,7 @@ tools:
   category: Data Stores
   sub_category: Databases
   image_url: https://img.stackshare.io/service/1043/HBase-Twitter3.png
+  detection_source_url: https://github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
   detection_source: pom.xml
   last_updated_by: Tawanda
   last_updated_on: 2021-08-07 21:10:30.000000000 Z
@@ -84,6 +91,7 @@ tools:
   category: Build, Test, Deploy
   sub_category: Version Control System
   image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot
   detection_source: Repo Metadata
 - name: Apache Camel
   description: A versatile open source integration framework
@@ -94,6 +102,7 @@ tools:
   category: Application Hosting
   sub_category: Platform as a Service
   image_url: https://img.stackshare.io/service/3276/xWt1RFo6_400x400.jpg
+  detection_source_url: https://github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/src/main/resources/application.properties
   detection_source: src/main/resources/application.properties
   last_updated_by: Tawanda
   last_updated_on: 2021-08-07 23:03:11.000000000 Z
@@ -106,7 +115,7 @@ tools:
   category: Libraries
   sub_category: Maven Packages
   image_url: https://img.stackshare.io/package/maven/image.png
-  detection_source_url: github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
+  detection_source_url: https://github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
   detection_source: pom.xml
   last_updated_by: Tawanda
   last_updated_on: 2021-09-05 16:19:08.000000000 Z
@@ -116,6 +125,7 @@ tools:
   category: Libraries
   sub_category: Maven Packages
   image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
   detection_source: pom.xml
   last_updated_by: Tawanda
   last_updated_on: 2021-09-05 16:19:08.000000000 Z
@@ -125,6 +135,7 @@ tools:
   category: Libraries
   sub_category: Maven Packages
   image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
   detection_source: pom.xml
   last_updated_by: Tawanda
   last_updated_on: 2021-09-05 16:19:08.000000000 Z
@@ -137,7 +148,7 @@ tools:
   category: Libraries
   sub_category: Maven Packages
   image_url: https://img.stackshare.io/package/maven/image.png
-  detection_source_url: github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
+  detection_source_url: https://github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
   detection_source: pom.xml
   last_updated_by: Tawanda
   last_updated_on: 2021-09-05 16:19:08.000000000 Z
@@ -150,7 +161,7 @@ tools:
   category: Libraries
   sub_category: Maven Packages
   image_url: https://img.stackshare.io/package/maven/image.png
-  detection_source_url: github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
+  detection_source_url: https://github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
   detection_source: pom.xml
   last_updated_by: Tawanda
   last_updated_on: 2021-09-05 16:19:08.000000000 Z
@@ -162,6 +173,7 @@ tools:
   category: Libraries
   sub_category: Maven Packages
   image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
   detection_source: pom.xml
   last_updated_by: Tawanda
   last_updated_on: 2021-09-05 16:19:08.000000000 Z
@@ -174,7 +186,7 @@ tools:
   category: Libraries
   sub_category: Maven Packages
   image_url: https://img.stackshare.io/package/maven/image.png
-  detection_source_url: github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
+  detection_source_url: https://github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
   detection_source: pom.xml
   last_updated_by: Tawanda
   last_updated_on: 2021-09-05 16:19:08.000000000 Z
@@ -186,6 +198,7 @@ tools:
   category: Libraries
   sub_category: Maven Packages
   image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
   detection_source: pom.xml
   last_updated_by: Tawanda
   last_updated_on: 2021-09-05 16:19:08.000000000 Z
@@ -197,6 +210,7 @@ tools:
   category: Libraries
   sub_category: Maven Packages
   image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
   detection_source: pom.xml
   last_updated_by: Tawanda
   last_updated_on: 2021-09-05 16:19:08.000000000 Z
@@ -209,6 +223,7 @@ tools:
   category: Libraries
   sub_category: Maven Packages
   image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
   detection_source: pom.xml
   last_updated_by: Tawanda
   last_updated_on: 2021-09-05 16:19:08.000000000 Z
@@ -221,6 +236,7 @@ tools:
   category: Libraries
   sub_category: Maven Packages
   image_url: https://img.stackshare.io/package/maven/image.png
+  detection_source_url: https://github.com/TawandaMavondo/Gotour-Server-Application-Spring-Boot/blob/master/pom.xml
   detection_source: pom.xml
   last_updated_by: Tawanda
   last_updated_on: 2021-09-05 16:19:08.000000000 Z
